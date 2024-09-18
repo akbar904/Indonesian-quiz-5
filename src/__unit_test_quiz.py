@@ -29,8 +29,10 @@ class TestQuiz(unittest.TestCase):
     def test_update_score(self):
         self.quiz.questions.append(self.question1)
         self.quiz.checkAnswer("1945")
-        self.quiz.updateScore(self.player)
-        self.assertEqual(self.player.score, 1)
+        with self.assertRaises(TypeError) as context:
+            self.player.score = "not a number"
+            self.quiz.updateScore(self.player)
+        self.assertTrue('Score must be a number' in str(context.exception))
 
 if __name__ == '__main__':
     unittest.main()
