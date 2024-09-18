@@ -22,5 +22,7 @@ class Quiz:
             return False
 
     def updateScore(self, player):
+        if not isinstance(player.score, int):
+            raise TypeError('Score must be a number')
         if self.checkAnswer:
             player.score += 1

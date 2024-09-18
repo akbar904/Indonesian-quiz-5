@@ -15,7 +15,10 @@ class QuizGame:
 			playerAnswer = self.player.answer()
 			isCorrect = self.quiz.checkAnswer(question, playerAnswer)
 			if isCorrect:
-				self.player.score += 1
+				try:
+					self.player.score += 1
+				except TypeError:
+					raise ValueError("Score must be a number")
 			self.updateScore(self.player.score)
 
 	def displayQuestion(self, question):
@@ -26,7 +29,13 @@ class QuizGame:
 		print(f"D. {question.optionD}")
 
 	def updateScore(self, score):
-		print(f"Your current score is: {score}")
+		try:
+			print(f"Your current score is: {score}")
+		except TypeError:
+			raise ValueError("Score must be a number")
 
 	def endQuiz(self):
-		print(f"End of the quiz. Your final score is: {self.player.score}")
+		try:
+			print(f"End of the quiz. Your final score is: {self.player.score}")
+		except TypeError:
+			raise ValueError("Score must be a number")
